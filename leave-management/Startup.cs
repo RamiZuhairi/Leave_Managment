@@ -34,7 +34,7 @@ namespace leave_management
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            //Add refrences for Repository and Contracts to startup file,I love GitHub
+            //Add refrences for Repository and Contracts to startup file
             // add the knowlage and perpuses of out classes to dot net core ,its important to let .NetCore the relationsip between the tables 
             services.AddScoped<ILeaveTypeRepostitory, LeaveTypeRepostitory>();
             services.AddScoped<ILeaveHistoryRepository, LeaveHistoryRepository>();
