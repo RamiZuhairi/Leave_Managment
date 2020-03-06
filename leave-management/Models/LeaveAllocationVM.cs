@@ -23,7 +23,7 @@ namespace leave_management.Models
        
         public EmployeeVM Employee { get; set; }//this is return one entity called Employee,we get them from View model we have created  EmployeeVM, and we will create IEnumerable for it
         public string EmployeeId { get; set; }
-        public DetailsLeaveTypeVM LeaveType { get; set; }//this is return  one entiry called LeaveType ,we get them from View model we have created  , we wil create IEnumerable for it 
+        public LeaveTypeVM LeaveType { get; set; }//this is return  one entiry called LeaveType ,we get them from View model we have created  , we wil create IEnumerable for it 
         public int LeaveTypeId { get; set; }
 
         //while the  Employee,EmployeeId get collected we must have kind of datacollection like array to gather that data and add it to IEnumerable ()data collection , same to LeaveTypes

@@ -13,20 +13,15 @@ namespace leave_management.Models
     /// 4- you can have diffrent view models for diffrent perpouses 
     /// 5- reason why we doing the hard work because that is the write way to do it to get letss headache in the future 
     /// </summary>
-    public class DetailsLeaveTypeVM
+    public class LeaveTypeVM
     {
         public int Id { get; set; } 
-        
+        [Required]
         public string Name { get; set; }
-        public DateTime DateCreated { get; set; }
+        [Display(Name ="Date Created")]
+        public DateTime? DateCreated { get; set; }// ? mean is nullable so it it will not presure me to provde value for it 
     }
 
-    public class CreateLeaveTypeVM
-    {
-        
-        [Required]// its mean the user cant submitied empty 
-        public string Name { get; set; }
-      
-    }
+
 
 }

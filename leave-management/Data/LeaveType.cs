@@ -13,6 +13,7 @@ namespace leave_management.Data
         public int Id { get; set; } // primary key
         [Required] // means we not allow Nulls in the colmn name 
         public string Name { get; set; }
+        [Display(Name = "Date Created")]// just to view in way we want it , thats how to control our view of the colums
         public DateTime DateCreated { get; set; }
     }
 }

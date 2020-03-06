@@ -1,3 +1,20 @@
-﻿@{
+﻿@* 
+Summary : 
+    1- amazing way to use _ViewStart.cshtml and delete lyaout from each View we have to make it works.
+    2. from this file we can spprate poeple from Admain for EXAMPLE:
+    @{
+    if(User.IshInRole("Admin"))
+    {
+    Layout=""_AdmainLayout";
+    }else
+    {
+      Layout=""_NONAdmainLayout";
+    }
+    }
+
+
+*@
+
+@{
     Layout = "_Layout";
 }
