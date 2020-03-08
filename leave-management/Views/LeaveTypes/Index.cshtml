@@ -5,12 +5,15 @@
     //Layout = "~/Views/Home/Index.cshtml";
 }
 
-<h1>Index</h1>
-
+<h1>Leave Types</h1>
+<hr />
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-success">
+        <i class="fa fa-plus-square" aria-hidden="true"></i> @*// this is from fontawesome.com/v4.7.0/icons/*@
+        Create New
+    </a>
 </p>
-<table class="table">
+<table id="tblData" class="table">
     <thead>
         <tr>
             <th>
@@ -19,26 +22,43 @@
             <th>
                 @Html.DisplayNameFor(model => model.DateCreated)
             </th>
-            <th></th>
+            <th> Manage</th>
         </tr>
     </thead>
 
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateCreated)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCreated)
+                </td>
+                <td>
+                    <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.Id">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                        Edit
+                    </a> |
+                    <a asp-action="Details" class="btn btn-info" asp-route-id="@item.Id">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+
+                        Details
+                    </a> |
+                    <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id" onclick="return confirm('Are you sure you want to delete this record?')">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
-
+@*  //here we will have the code one time on wwwroot/js/site.js, and use it everytime we have table only we nned to make sure we put id="tblData"    *@
+@section scripts{
+    <script>
+      
+    </script>
+}

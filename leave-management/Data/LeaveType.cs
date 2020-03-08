@@ -9,6 +9,7 @@ namespace leave_management.Data
     public class LeaveType
     {
         //(Ctrl+ .) it will show us suggestyions same whne we press on the yello light for Qucik Action 
+       
         [Key] // this is requirend in DB to set the primary  key for this file or table  
         public int Id { get; set; } // primary key
         [Required] // means we not allow Nulls in the colmn name 

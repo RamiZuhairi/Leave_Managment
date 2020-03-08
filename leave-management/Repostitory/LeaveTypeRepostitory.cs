@@ -76,6 +76,14 @@ namespace leave_management.Repostitory
             throw new NotImplementedException();
         }
 
+        public bool IsExists(int id)
+        {
+            // throw new NotImplementedException();
+            //var exists = _db.LeaveTypes.Any();//this is nice way to check if the table is empty 
+            var exists = _db.LeaveTypes.Any(q => q.Id == id);// means i there is any Id of lemada is equl to id parmeter 
+            return exists;
+        }
+
         public bool Save()
         {
             //throw new NotImplementedException();

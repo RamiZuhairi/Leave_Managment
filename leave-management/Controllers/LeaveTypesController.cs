@@ -40,10 +40,15 @@ namespace leave_management.Controllers
         }
 
         // GET: LeaveTypes/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int id)//we need to check if the request exist , then we processed the data 
         {
-          
-            return View();
+          if(!_repo.IsExists(id))
+            {
+                return NotFound();
+            }
+            var leavetype = _repo.FindById(id);
+            var model = _mapper.Map<LeaveTypeVM>(leavetype);
+            return View(model);
         }
 
         // GET: LeaveTypes/Create
@@ -55,77 +60,112 @@ namespace leave_management.Controllers
         // POST: LeaveTypes/Create
         [HttpPost]// this will our post 
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(LeaveTypeVM model)
         {
             try
             {
                 // TODO: Add insert logic here
                 if(!ModelState.IsValid)
                 {
-                    return View(collection);
+                    return View(model);
                 }
-                // we need to map it as well to the data type we want
-                var leaveType = _mapper.Map<LeaveType>(collection);
-                leaveType.DateCreated = DateTime.Now;//we dont requir the user to do that we , we will set the data of now 
-                var isSuccess =  _repo.Create(leaveType);// this will return bool if its not success the form will not be submited 
+              
+                var leaveType = _mapper.Map<LeaveType>(model);
+                leaveType.DateCreated = DateTime.Now;
+                var isSuccess = _repo.Create(leaveType);
                 if(!isSuccess)
                 {
-                    ModelState.AddModelError("","Something went Wrong...");// ModelState has all type of errores we want to display to user 
-                    return View(collection);
+                    ModelState.AddModelError("","Something went Wrong...");
+                    return View(model);
                 }
 
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "Something went Wrong...");
+                return View(model);
             }
         }
 
         // GET: LeaveTypes/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            // first Edit need to know if there is any records first
+            if(!_repo.IsExists(id))
+            {
+                return NotFound();// this is nice 404 error to tell user 
+            }
+            var leavetype = _repo.FindById(id);
+            var model = _mapper.Map<LeaveTypeVM>(leavetype);// always must be mapper 
+
+            return View(model);
         }
 
         // POST: LeaveTypes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
+        public ActionResult Edit(LeaveTypeVM model)
+        {// what we doing in Edit same what we done in Create very easy only change update fun
             try
             {
                 // TODO: Add update logic here
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                var leaveType = _mapper.Map<LeaveType>(model);
+                leaveType.DateCreated = DateTime.Now;
+                var isSuccess = _repo.Update(leaveType);
+                if (!isSuccess)
+                {
+                    ModelState.AddModelError("", "Something went Wrong...");
+                    return View(model);
+                }
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));//we can redirect to another page if we want after pdate 
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "Something went Wrong...");
+                return View(model);
             }
         }
 
         // GET: LeaveTypes/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var leavetype = _repo.FindById(id);// find eleement by id 
+            if (leavetype == null)
+            {
+                return NotFound();
+            }
+            var isSuccess = _repo.Delete(leavetype);// delete i t
+            if (!isSuccess)
+            {
+                ModelState.AddModelError("", "Something went Wrong...");
+                return BadRequest();// this is another kind of error 
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: LeaveTypes/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Delete(int id, LeaveTypeVM model)
+        //{
+        //    try
+        //    {
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            
+
+        //       //we can redirect to another page if we want after pdate 
+        //    }
+        //    catch
+        //    {
+        //        ModelState.AddModelError("", "Something went Wrong...");
+        //        return View(model);
+        //    }
+        //}
     }
 }

@@ -11,6 +11,7 @@ namespace leave_management.Contracts
     {
         ICollection<T> FindAll();// Icollection is array it will take T is your class as generic identifer and find All from DB, return all data in that T table 
         T FindById(int id); // then find what we loocking for by ID (function to find parmater by id )
+        bool IsExists(int id);// to check in daata base weather the row id exists or not ,JUST MAKE SURE WHEN YOU ADD ANY NEW FUN , YOU MUST IMPEMENT IT IN REPOSITORY CLASSES BECAUSE THEY INHERT 
         bool Create(T entity);// now this is more fun, when we create leave type , need to accept the data and put it in db 
         bool Update(T entity);// to do update we will follow the same pattrn 
         bool Delete(T entity);//now we delete 

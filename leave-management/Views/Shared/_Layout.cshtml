@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Core Leave Management</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />  @*// from dataSets.net to make out tables resposive , make sure always underbootstrab because most of them inhert from it*@
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />@*//from .bootstrapcdn.com/font-awesome to fix icons*@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
@@ -38,8 +40,8 @@
                         </li>
 
                         <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -59,9 +61,10 @@
     @* some very nice tip to learn if we want to add scrits for stile must be under the jquery , bootstrap so we keep adding underneth *@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>  @*// from dataSets.net to make out tables resposive , make sure always underbootstrab because most of them inhert from it*@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
-    
+
 
 </body>
 </html>
