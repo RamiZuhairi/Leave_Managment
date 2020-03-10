@@ -45,15 +45,17 @@ namespace leave_management
 
 
 
-            
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)// this is means when someone registoers must have conformation email, but we have to change that in register.cs
+            services.AddDefaultIdentity<IdentityUser>()// we will disable email conformation for now  look above
+                .AddRoles<IdentityRole>()// we going to identify the Roles  for the user 
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<IdentityUser> userManager, RoleManager<IdentityRole>roleManager )
         {
             if (env.IsDevelopment())
             {
@@ -73,6 +75,9 @@ namespace leave_management
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            //add seed metod, as we see its static very easy to call  
+            SeedData.Seed(userManager, roleManager);
 
             app.UseEndpoints(endpoints =>
             {

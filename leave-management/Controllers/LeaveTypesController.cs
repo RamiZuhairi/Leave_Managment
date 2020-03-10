@@ -6,6 +6,7 @@ using AutoMapper;
 using leave_management.Contracts;
 using leave_management.Data;
 using leave_management.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 /// <summary>
@@ -18,7 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 /// </summary>
 namespace leave_management.Controllers
 {
-    
+    [Authorize(Roles = "Administrator")] //this will be more security ,they need to login before we get down ,they cant just add the code(L23,M11:09) 
     public class LeaveTypesController : Controller
     {
         private readonly ILeaveTypeRepostitory _repo;//just dont forget when you use private we can use underscore_ to lead us to know (must be readOnly)
@@ -31,6 +32,7 @@ namespace leave_management.Controllers
             _repo = repo;
             _mapper = mapper;
         }
+        
         // GET: LeaveTypes
         public ActionResult Index() // when we request action for index , we will get index fun called return View(); / then it will go to Views foloder,check the same name if the Controller (Home)HomeController then  then home then index.cshtml and retuen the content of that file 
         {// here when we work with index 
