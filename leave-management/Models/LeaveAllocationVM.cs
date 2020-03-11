@@ -17,17 +17,43 @@ namespace leave_management.Models
     public class LeaveAllocationVM
     {
         public int Id { get; set; }
-        [Required]
+      
         public int NumberOfDays { get; set; }
         public DateTime DateCreated { get; set; }
-       
+        public int Period { get; set; }
         public EmployeeVM Employee { get; set; }//this is return one entity called Employee,we get them from View model we have created  EmployeeVM, and we will create IEnumerable for it
         public string EmployeeId { get; set; }
         public LeaveTypeVM LeaveType { get; set; }//this is return  one entiry called LeaveType ,we get them from View model we have created  , we wil create IEnumerable for it 
         public int LeaveTypeId { get; set; }
 
-        //while the  Employee,EmployeeId get collected we must have kind of datacollection like array to gather that data and add it to IEnumerable ()data collection , same to LeaveTypes
-        public IEnumerable<SelectListItem> Employees { get; set; }// SelectListItem is the Data type and the Emplyees is the name, thats represent the drop down list 
-        public IEnumerable<SelectListItem> LeaveTypes { get; set; }//drop down list where the user need to select   
+      
+        
+      
+    }
+    public class CreateLeaveAllocationVM
+    {
+
+   
+           public int NumberUpdated { get; set; }
+           public List< LeaveTypeVM> LeaveTypes { get; set; }
+     }
+    public class EditLeaveAllocationVM
+    {
+        public int Id { get; set; }
+       
+        public EmployeeVM Employee { get; set; }
+        public string EmployeeId { get; set; }
+        [Display( Name="Number Of Days")]
+        public int NumberOfDays { get; set; }
+        public LeaveTypeVM LeaveType { get; set; }
+       
+    }
+    public class ViewAllocationVM
+    {
+
+
+        public EmployeeVM Employee { get; set; }
+        public string EmployeeId { get; set; }
+        public List<LeaveAllocationVM> LeaveAllocations { get; set; }
     }
 }

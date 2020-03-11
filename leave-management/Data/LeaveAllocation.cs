@@ -11,7 +11,7 @@ namespace leave_management.Data
     {
         [Key]
         public int Id { get; set; }
-        public int NumberOfDays { get; set; }
+        public int NumberOfDays { get; set; }//number of days that will reflect in UI
         public DateTime DateCreated { get; set; }
         [ForeignKey("EmployeeId")] // will be the forent key of leaveAlocation and its the primary key of employee to connect  
         public Employee Employee { get; set; }//we put Employee class because we want to know the employee detials  
@@ -21,5 +21,7 @@ namespace leave_management.Data
         [ForeignKey("LeaveTypeId")]
         public LeaveType LeaveType { get; set; }
         public int LeaveTypeId { get; set; }
+
+        public int Period { get; set; }//years,it will check if empoyee has leave in this year
     }
 }

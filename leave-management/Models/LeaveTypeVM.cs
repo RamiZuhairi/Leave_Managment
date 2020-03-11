@@ -18,6 +18,11 @@ namespace leave_management.Models
         public int Id { get; set; } 
         [Required]
         public string Name { get; set; }
+        
+        [Required]
+        [Display(Name ="Default Number Of Days")]
+        [Range(1,25,ErrorMessage ="Please enter valid number between(1-25)!")]
+        public int DefaultDays { get; set; }
         [Display(Name ="Date Created")]
         public DateTime? DateCreated { get; set; }// ? mean is nullable so it it will not presure me to provde value for it 
     }

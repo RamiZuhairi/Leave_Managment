@@ -1,5 +1,6 @@
 ﻿using leave_management.Contracts;
 using leave_management.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,13 @@ namespace leave_management.Repostitory
         {
             _db = db;
         }
+
+        public bool CheckAllocation(int leavetypeid, string employeeid)
+        {
+            var period = DateTime.Now.Year;
+            return (FindAll().Where(q => q.EmployeeId == employeeid && q.LeaveTypeId == leavetypeid && q.Period == period).Any());//L28,M32 will retrun all in condition using lemdaEX,Any to return bool 
+        }
+
         public bool Create(LeaveAllocation entity)
         {
             _db.LeaveAllocations.Add(entity);
@@ -30,14 +38,29 @@ namespace leave_management.Repostitory
 
         public ICollection<LeaveAllocation> FindAll()
         {
-            var leaveAllocations = _db.LeaveAllocations.ToList();
+            var leaveAllocations = _db.LeaveAllocations
+                .Include(q=>q.LeaveType)
+                .Include(q=>q.Employee)
+                .ToList();//here we put include fun same as inner join so we can get all data related to LeaveType L30,M30:30
             return leaveAllocations;
         }
 
         public LeaveAllocation FindById(int id)
         {
-            var leaveAllocation = _db.LeaveAllocations.Find(id);
+            var leaveAllocation = _db.LeaveAllocations
+                .Include(q => q.LeaveType)
+                .Include(q => q.Employee)
+                .FirstOrDefault(q=>q.Id==id);
             return leaveAllocation;
+        }
+
+        public ICollection<LeaveAllocation> GetLeaveAllocationsByEmployee(string id)
+        {
+           
+            var period = DateTime.Now.Year;
+            return FindAll()
+                .Where(q => q.EmployeeId == id && q.Period == period )//L30,M10:25
+                .ToList();
         }
 
         public bool IsExists(int id)

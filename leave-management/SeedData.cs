@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using leave_management.Data;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,20 +10,20 @@ namespace leave_management
     public static class SeedData // we make it static to use it without creating object to that class , easier ,but if the class is static must everything inside static to dont forget 
     {
 
-        public static void Seed(UserManager<IdentityUser> userManager,RoleManager<IdentityRole> roleManager)
+        public static void Seed(UserManager<Employee> userManager,RoleManager<IdentityRole> roleManager)
         {
             SeedRoles(roleManager);
             SeedUsers(userManager);
             //dont forget to add Seed that to startup.cs
 
         }
-        private static void SeedUsers(UserManager<IdentityUser> userManager)
+        private static void SeedUsers(UserManager<Employee> userManager)
         {
-            if (userManager.FindByNameAsync("admin").Result == null)//if we dont have the first admin role thenw e have to create it 
+            if (userManager.FindByNameAsync("admain@localhost").Result == null)//if we dont have the first admin role thenw e have to create it 
             {
-                var user = new IdentityUser
+                var user = new Employee
                 {
-                    UserName = "admin",
+                    UserName = "admain@localhost",
                     Email = "admain@localhost"
                 };
                 var result = userManager.CreateAsync(user, "Admin@123").Result;//then we have to create the user with username and pasword,must be complex password or give error

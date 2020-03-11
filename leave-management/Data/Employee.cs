@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace leave_management.Data
 {
     public class Employee : IdentityUser// the empoyee is the same user so we can use inhert to take the data from user table 
-        // so if we want the props below to join the user table we will inhert from IdentityUser
+                                        // so if we want the props below to join the user table we will inhert from Employee
     {
         // first way to create this is to write prop then press TaB x2
         public string Firstname { get; set; }

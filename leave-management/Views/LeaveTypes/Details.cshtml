@@ -11,13 +11,20 @@
     
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DefaultDays)
+        </dt>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DefaultDays)@*// means give me the name that you want in LeaveTypeVM.cs  Date Created*@
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.DateCreated)
         </dt>
         <dd class="col-sm-10">
