@@ -1,0 +1,147 @@
+﻿@model AdminLeaveRequestViewVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a class="btn btn-success" asp-action="Create"> <i class="fa fa-plus"></i> Add Leave For Employee</a>
+</p>
+<div class="row">
+    <div class="col-md-3">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body text-center text-primary">
+                <h1 class="card-title">@Model.TotalRequests</h1>
+                <h5 class="card-text">@Html.DisplayNameFor(model => model.TotalRequests)</h5>
+                @* <a href="#" class="btn btn-primary">Go somewhere</a>//we can use this putton to take us to requests *@
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body text-center text-warning">
+                <h1 class="card-title">@Model.PendingRequests</h1>
+                <h5 class="card-text">@Html.DisplayNameFor(model => model.PendingRequests)</h5>
+                @* <a href="#" class="btn btn-primary">Go somewhere</a>//we can use this putton to take us to requests *@
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body text-center text-success">
+                <h1 class="card-title">@Model.ApprovedRequests</h1>
+                <h5 class="card-text">@Html.DisplayNameFor(model => model.ApprovedRequests)</h5>
+                @* <a href="#" class="btn btn-primary">Go somewhere</a>//we can use this putton to take us to requests *@
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body text-center text-danger">
+                <h1 class="card-title">@Model.RejectedRequests</h1>
+                <h5 class="card-text">@Html.DisplayNameFor(model => model.RejectedRequests)</h5>
+                @* <a href="#" class="btn btn-primary">Go somewhere</a>//we can use this putton to take us to requests *@
+            </div>
+        </div>
+    </div>
+
+</div>
+<br />
+<br />
+<hr />
+
+<h1>Leave Request Log</h1>
+<table id="tblData" class="table">
+    <thead>
+        <tr>
+            <th>
+               Employee Name
+            </th>
+            <th>
+                Start Date
+            </th>
+            <th>
+               End Date
+            </th>
+            <th>
+               Leave Type
+            </th>
+            <th>
+               Date Requested
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.DateActioned)
+            </th>*@
+            <th>
+                Approval Status
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.ApprovedBy)
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.LeaveRequests) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestingEmployee.Firstname)   @Html.DisplayFor(modelItem => item.RequestingEmployee.Lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LeaveType.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateRequested)
+            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.DateActioned)
+        </td>*@
+            <td>
+                @*@Html.DisplayFor(modelItem => item.Approved) //L35,M28 instead of that we will put condition *@
+                @if (item.Approved == true)
+                {
+                    <span class="badge badge-pill badge-success"> Approved </span>
+                <td>
+
+                    <a class="btn-lg btn-outline-info" asp-action="Details" asp-route-id="@item.Id"> <i class="fa fa-search "></i> Review</a>
+
+                </td>
+            }
+            else if (item.Approved == false)
+            {
+                <span class="badge badge-pill badge-danger"> Rejected </span>
+                <td>
+
+                    <a class="btn-lg btn-outline-info" asp-action="Details" asp-route-id="@item.Id"> <i class="fa fa-search "></i> Review</a>
+
+                </td>
+            }
+            else
+            {
+                <span class="badge badge-pill badge-warning"> Pedding Approval </span>
+
+                <td>
+
+                    <a class="btn-lg btn-outline-dark" asp-action="Details" asp-route-id="@item.Id">
+                        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+                         process
+                    </a>
+
+                </td>
+            }
+
+                </td>
+
+
+            </tr>
+}
+    </tbody>
+</table>

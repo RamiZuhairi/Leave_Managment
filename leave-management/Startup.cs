@@ -37,7 +37,7 @@ namespace leave_management
             //Add refrences for Repository and Contracts to startup file
             // add the knowlage and perpuses of out classes to dot net core ,its important to let .NetCore the relationsip between the tables 
             services.AddScoped<ILeaveTypeRepostitory, LeaveTypeRepostitory>();
-            services.AddScoped<ILeaveHistoryRepository, LeaveHistoryRepository>();
+            services.AddScoped<ILeaveRequestRepository, LeaveRequestRepository>();
             services.AddScoped<ILeaveAllocationRepository, LeaveAllocationRepository>();
 
             // now after we have dont the Mapping we have add new service to inisialise it here when the app is runnning 

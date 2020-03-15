@@ -5,7 +5,9 @@
 }
 
     <h1>Details For - @Model.Employee.Lastname, @Model.Employee.Firstname</h1>
-
+    <p>
+        <a class="btn btn-success" asp-controller="LeaveAllocation" asp-action="Index"> <i class="fa fa-plus"></i> Add Leave For @Model.Employee.Firstname</a>
+    </p>
 <div>
     
     <hr />
@@ -70,7 +72,9 @@
             @*&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;*@
             <li class="list-group-item">
                 <h6>
-                    @item.LeaveType.Name     <span class="badge badge-secondary">   @item.NumberOfDays </span>| <a  asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning ">
+                    @item.LeaveType.Name     <span class="badge badge-secondary">   @item.NumberOfDays </span>
+                    <br />
+                    <a  asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-block ">
                         <i class="fa fa-pencil-square" aria-hidden="true"></i>
                         Edit
                     </a>

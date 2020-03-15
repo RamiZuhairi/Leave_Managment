@@ -28,13 +28,9 @@ namespace leave_management.Data
         public DbSet<LeaveType> LeaveTypes { get; set; } // the blue LeaveType is the name of the class , the black leaveTypes is name od the table 
 
         public DbSet<LeaveAllocation> LeaveAllocations { get; set; }
-        public DbSet<LeaveHistory> LeaveHistories { get; set; }
-        public DbSet<leave_management.Models.LeaveTypeVM> LeaveTypeVM { get; set; }
-        public DbSet<leave_management.Models.EmployeeVM> EmployeeVM { get; set; }
-        public DbSet<leave_management.Models.LeaveAllocationVM> LeaveAllocationVM { get; set; }
-        public DbSet<leave_management.Models.EditLeaveAllocationVM> EditLeaveAllocationVM { get; set; }
-        //public DbSet<LeaveTypeVM> LeaveTypeVM { get; set; }
-        //public DbSet<LMS.Models.LeaveTypeVM> LeaveTypeM { get; set; }
+        public DbSet<LeaveRequest> LeaveRequests { get; set; }
+        public DbSet<leave_management.Models.LeaveRequestVM> LeaveRequestVM { get; set; }
+
 
 
     }
